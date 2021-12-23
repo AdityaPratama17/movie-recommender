@@ -4,9 +4,21 @@ from django.shortcuts import render
 # Create your views here.
 def index(request):
     context ={
-        'isRecommendation' : 'recommendation'
+        'isDashboard' : 'dashboard'
     }
     return render(request, 'recommender/index.html',context)
+
+def recommender(request):
+    context ={
+        'isRecommender' : 'recommender'
+    }
+    return render(request, 'recommender/recommender/index.html',context)
+
+def result(request,id):
+    context ={
+        'isRecommender' : 'recommender'
+    }
+    return render(request, 'recommender/recommender/result.html',context)
 
 def user(request):
     context ={

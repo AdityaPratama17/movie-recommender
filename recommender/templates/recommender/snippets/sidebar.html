@@ -22,9 +22,15 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
-            <a href="{% url 'recommender:index' %}" class="nav-link {% if isRecommendation %} active {% endif %}">
+            <a href="{% url 'recommender:index' %}" class="nav-link {% if isDashboard %} active {% endif %}">
+              <i class="fas fa-tachometer-alt"></i>
+              <p>Dashboard</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'recommender:recommender' %}" class="nav-link {% if isRecommender %} active {% endif %}">
               <i class="nav-icon fas fa-th"></i>
-              <p>Recomendations</p>
+              <p>Recommender</p>
             </a>
           </li>
           <li class="nav-item">
