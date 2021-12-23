@@ -34,7 +34,7 @@
 
                 <div class="row">
                     <div class="col-md-12">
-                        <table class="table">
+                        <table class="table" id="table-movie">
                             <thead>
                               <tr>
                                 <th >#</th>
@@ -75,5 +75,12 @@
 </div>
 <!-- /.content-wrapper -->
 {% endblock content %}
+
+{% block customscript %}
+<script>
+  $('#table-movie').DataTable();
+</script>
+{% endblock customscript %}
+  
 
     

@@ -34,7 +34,7 @@
 
                 <div class="row">
                     <div class="col-md-12">
-                        <table class="table">
+                        <table class="table" id="table-link">
                             <thead>
                               <tr>
                                 <th >#</th>
@@ -67,5 +67,12 @@
 </div>
 <!-- /.content-wrapper -->
 {% endblock content %}
+
+{% block customscript %}
+<script>
+  $('#table-link').DataTable();
+</script>
+{% endblock customscript %}
+  
 
     
