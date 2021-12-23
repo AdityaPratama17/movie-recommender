@@ -1,0 +1,216 @@
+{% extends 'recommender/base.html' %}
+
+{% block content %}
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">Recomendation</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Recommendation</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="small-box bg-light card-success card-outline">
+                  <div class="inner">
+                    <p>Users</p>
+                    <h3>12300</h3>
+                  </div>
+                  <div class="icon text-success">
+                    <i class="fas fa-users"></i>
+                  </div>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+              <div class="small-box bg-light card-success card-outline">
+                <div class="inner">
+                  <p>Movies</p>
+                  <h3>500</h3>
+                </div>
+                <div class="icon text-success">
+                  <i class="fas fa-video"></i>
+                </div>
+              </div>
+            </div>
+
+          <div class="col-sm-4">
+            <div class="small-box bg-light card-success card-outline">
+              <div class="inner">
+                <p>Link</p>
+                <h3>123</h3>
+              </div>
+              <div class="icon text-success">
+                <i class="fas fa-link"></i>
+              </div>
+            </div>
+          </div>
+
+        </div> 
+
+         <div class="row">
+            <div class="col-sm-12">
+              <div class="float-right mb-3">
+                <button id="btn-filter" class="btn btn-primary">Pilih User <i class="fas fa-filter"></i></button>
+              </div>
+            </div>   
+          </div>
+
+          <div class="row">
+              <div class="col-md-12">
+                <h5>Recomendation Movies</h5>
+              </div>
+          </div>
+
+          <div class="row mb-4">
+           <div class="col-md-12">
+            <div class="card card-primary card-outline">
+                <div class="card-body">    
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th >#</th>
+                                    <th >ID Movie</th>
+                                    <th >Title</th>
+                                    <th >Genre</th>
+                                    <th >Rating</th>
+                                    <th >Is Rating by</th>
+                                    <th >Is Tag By</th>
+                                    <th >Has Link</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <th scope="row">1</th>
+                                    <td>1</td>
+                                    <td>Naruto</td>
+                                    <td>Anime</td>
+                                    <td>4.5</td>
+                                    <td>1233</td>
+                                    <td>123</td>
+                                    <td>2</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+           </div>
+          </div>
+
+        <div class="row">
+            <div class="col-md-12">
+              <h5>Genre Favorite</h5>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+         <div class="col-md-12">
+          <div class="card card-primary card-outline">
+              <div class="card-body">    
+                  <div class="row">
+                      <div class="col-md-12">
+                          <table class="table">
+                              <thead>
+                                <tr>
+                                  <th >#</th>
+                                  <th >ID Movie</th>
+                                  <th >Title</th>
+                                  <th >Genre</th>
+                                  <th >Rating</th>
+                                  <th >Is Rating by</th>
+                                  <th >Is Tag By</th>
+                                  <th >Has Link</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <th scope="row">1</th>
+                                  <td>1</td>
+                                  <td>Naruto</td>
+                                  <td>Anime</td>
+                                  <td>4.5</td>
+                                  <td>1233</td>
+                                  <td>123</td>
+                                  <td>2</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                      </div>
+                  </div>
+              </div>
+          </div>
+         </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+              <h5>Top Rated Movie</h5>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+         <div class="col-md-12">
+          <div class="card card-primary card-outline">
+              <div class="card-body">    
+                  <div class="row">
+                      <div class="col-md-12">
+                          <table class="table">
+                              <thead>
+                                <tr>
+                                  <th >#</th>
+                                  <th >ID Movie</th>
+                                  <th >Title</th>
+                                  <th >Genre</th>
+                                  <th >Rating</th>
+                                  <th >Is Rating by</th>
+                                  <th >Is Tag By</th>
+                                  <th >Has Link</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <th scope="row">1</th>
+                                  <td>1</td>
+                                  <td>Naruto</td>
+                                  <td>Anime</td>
+                                  <td>4.5</td>
+                                  <td>1233</td>
+                                  <td>123</td>
+                                  <td>2</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                      </div>
+                  </div>
+              </div>
+          </div>
+         </div>
+        </div>
+
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+{% endblock content %}
+
+    

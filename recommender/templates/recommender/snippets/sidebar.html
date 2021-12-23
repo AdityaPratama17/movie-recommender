@@ -1,0 +1,64 @@
+{% load static %}
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="#" class="brand-link mt-2 mb-3">
+      <img src="{%static 'recommender/vendor/dist/img/AdminLTELogo.png'%}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">Recomender System</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="{%static 'recommender/vendor/dist/img/user2-160x160.jpg'%}" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          <a href="#" class="d-block">Admin</a>
+        </div>
+      </div>
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <li class="nav-item">
+            <a href="{% url 'recommender:index' %}" class="nav-link {% if isRecommendation %} active {% endif %}">
+              <i class="nav-icon fas fa-th"></i>
+              <p>Recomendations</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link {% if isUser %} active {% elif isMovie %} active {% elif isLink %} active {% endif %}">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Master Data
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{% url 'recommender:user' %}" class="nav-link {% if isUser %} active {% endif %}">
+                    <i class="fas fa-users"></i>
+                  <p>Data User</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'recommender:movie' %}" class="nav-link {% if isMovie %} active {% endif %}">
+                    <i class="fas fa-video"></i>
+                  <p>Data Movie</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'recommender:link' %}" class="nav-link {% if isLink %} active {% endif %}">
+                    <i class="fas fa-link"></i>
+                  <p>Data Link</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
