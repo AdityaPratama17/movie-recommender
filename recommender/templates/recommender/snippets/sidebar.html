@@ -24,26 +24,26 @@
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <li class="nav-item">
-          <a href="{% url 'recommender:index' %}" class="nav-link {% if isRecommendation %} active {% endif %}">
+          <a href="{% url 'recommender:recommender_index' %}" class="nav-link {% if isRecommendation %} active {% endif %}">
             <i class="nav-icon fas fa-th"></i>
             <p>Recommendation</p>
           </a>
         </li>
         <li class="nav-item">
           <a href="{% url 'recommender:movie' %}" class="nav-link {% if isMovie %} active {% endif %}">
-            <i class="fas fa-video"></i>
+            <i class="nav-icon fas fa-video"></i>
             <p>Movie</p>
           </a>
         </li>
         <li class="nav-item">
           <a href="{% url 'recommender:tag' %}" class="nav-link {% if isTag %} active {% endif %}">
-            <i class="fas fa-tags"></i>
+            <i class="nav-icon fas fa-tags"></i>
             <p>Tag</p>
           </a>
         </li>
         <li class="nav-item">
           <a href="{% url 'recommender:rank' %}" class="nav-link {% if isRank %} active {% endif %}">
-            <i class="fas fa-sort-amount-up"></i>
+            <i class="nav-icon fas fa-sort-amount-up"></i>
             <p>Rank</p>
           </a>
         </li>
