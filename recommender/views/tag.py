@@ -3,7 +3,8 @@ from django.shortcuts import render
 from neo4j import GraphDatabase
 
 def tag(request):
-    graphdb = GraphDatabase.driver(uri="bolt://localhost:7687", auth=("neo4j","1234"))
+    graphdb = GraphDatabase.driver(uri="bolt://localhost:11003", auth=("neo4j","1234"))
+    # graphdb = GraphDatabase.driver(uri="bolt://localhost:7687", auth=("neo4j","1234"))
     session = graphdb.session()
     query = "MATCH(m:Movie)-[r:isTaggedBy]->(u:User) RETURN u.ID AS id_user, m.ID AS id_movie, m.Title AS title, collect(r.Tag) AS tag ORDER BY id_user"
     nodes = session.run(query)
