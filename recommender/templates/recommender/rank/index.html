@@ -39,13 +39,15 @@
                   </tr>
                 </thead>
                 <tbody>
+                  {% for d in data  %}                    
                   <tr>
-                    <td>1</td>
-                    <td>Naruto</td>
-                    <td>123</td>
-                    <td>4.8</td>
-                    <td>1</td>
+                    <td>{{ d.id_movie }}</td>
+                    <td>{{ d.title }}</td>
+                    <td>{{ d.tot }}</td>
+                    <td class="text-warning"><i class="fas fa-star"></i> {{ d.avg|floatformat }}</td>
+                    <td>{{ forloop.counter }}</td>
                   </tr>
+                  {% endfor %}
                 </tbody>
               </table>
             </div>

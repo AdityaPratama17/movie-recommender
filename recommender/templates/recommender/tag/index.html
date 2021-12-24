@@ -36,20 +36,21 @@
                   </tr>
                 </thead>
                 <tbody>
+                  {% for d in data  %}
                   <tr>
-                    <th scope="row">1</th>
-                    <td>1</td>
-                    <td>123</td>
-                    <td>Naruto</td>
-                    <td>Anime</td>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ d.id_user }}</td>
+                    <td>{{ d.id_movie }}</td>
+                    <td>{{ d.title }}</td>
+                    <td style="width: 300px;">
+                      
+                      {% for tag in d.tag  %}
+                        <div class="btn btn-sm btn-info m-1 rounded-pill text-sm">{{ tag }}</div>
+                      {% endfor %}
+                        
+                    </td>
                   </tr>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>1</td>
-                    <td>123</td>
-                    <td>Naruto 2</td>
-                    <td>Anime</td>
-                  </tr>
+                  {% endfor %}
                 </tbody>
               </table>
             </div>
