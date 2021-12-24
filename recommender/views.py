@@ -4,36 +4,35 @@ from django.shortcuts import render
 # Create your views here.
 def index(request):
     context ={
-        'isDashboard' : 'dashboard'
+        'isRecommendation' : True,
+        'title':'Recommendation'
     }
     return render(request, 'recommender/index.html',context)
 
-def recommender(request):
+def result(request, id):
     context ={
-        'isRecommender' : 'recommender'
+        'isRecommendation' : True,
+        'title':'Result'
     }
-    return render(request, 'recommender/recommender/index.html',context)
-
-def result(request,id):
-    context ={
-        'isRecommender' : 'recommender'
-    }
-    return render(request, 'recommender/recommender/result.html',context)
-
-def user(request):
-    context ={
-        'isUser' : 'masterdata'
-    }
-    return render(request, 'recommender/user/index.html', context)
-
+    return render(request, 'recommender/result.html',context)
+    
 def movie(request):
     context ={
-        'isMovie' : 'masterdata'
+        'isMovie' : True,
+        'title' : 'Movie'
     }
     return render(request, 'recommender/movie/index.html', context)
 
-def link(request):
+def tag(request):
     context ={
-        'isLink' : 'masterdata'
+        'isTag' : True,
+        'title':'Tag'
     }
-    return render(request, 'recommender/link/index.html', context)
+    return render(request, 'recommender/tag/index.html', context)
+
+def rank(request):
+    context ={
+        'isRank' : True,
+        'title' : 'Ranking'
+    }
+    return render(request, 'recommender/rank/index.html', context)

@@ -23,12 +23,6 @@
     <div class="container-fluid">
       <div class="card card-primary card-outline">
         <div class="card-body">
-          <div class="row mb-3">
-            <div class="col-md-12">
-              <a href="#" class="btn btn-success">Rekomendasi User Baru</a>
-            </div>
-          </div>
-
           <div class="row">
             <div class="col-md-12">
               <table class="table" id="table-user">
@@ -36,31 +30,25 @@
                   <tr>
                     <th>#</th>
                     <th>ID User</th>
-                    <th>Jumlah Rating</th>
-                    <th>Jumlah Tag</th>
-                    <th class="text-center">Aksi</th>
+                    <th>ID Movie</th>
+                    <th>Title</th>
+                    <th>Tag</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
                     <th scope="row">1</th>
+                    <td>1</td>
                     <td>123</td>
-                    <td>123</td>
-                    <td>123</td>
-                    <td class="text-center">
-                      <a href="#" class="btn btn-sm btn-primary"> Genre Favorite</a>
-                      <a href="{% url 'recommender:result' id='1'%}" class="btn btn-sm btn-primary"> Rekomendasi</a>
-                    </td>
+                    <td>Naruto</td>
+                    <td>Anime</td>
                   </tr>
                   <tr>
                     <th scope="row">1</th>
+                    <td>1</td>
                     <td>123</td>
-                    <td>123</td>
-                    <td>123</td>
-                    <td class="text-center">
-                      <a href="#" class="btn btn-sm btn-primary"> Genre Favorite</a>
-                      <a href="{% url 'recommender:result' id='1'%}" class="btn btn-sm btn-primary"> Rekomendasi</a>
-                    </td>
+                    <td>Naruto 2</td>
+                    <td>Anime</td>
                   </tr>
                 </tbody>
               </table>

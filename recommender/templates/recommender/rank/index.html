@@ -26,32 +26,25 @@
     <div class="container-fluid">
       <div class="card card-primary card-outline">
         <div class="card-body">
-
           <div class="row">
             <div class="col-md-12">
-              <table class="table" id="table-movie">
+              <table class="table" id="table-link">
                 <thead>
                   <tr>
-                    <th>#</th>
                     <th>ID Movie</th>
                     <th>Title</th>
-                    <th>Genre</th>
+                    <th>Is Rating By</th>
                     <th>Rating</th>
-                    <th>Is Rating by</th>
-                    <th>Is Tag By</th>
-                    <th>Has Link</th>
+                    <th>Rank</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <th scope="row">1</th>
                     <td>1</td>
                     <td>Naruto</td>
-                    <td>Anime</td>
-                    <td>4.5</td>
-                    <td>1233</td>
                     <td>123</td>
-                    <td>2</td>
+                    <td>4.8</td>
+                    <td>1</td>
                   </tr>
                 </tbody>
               </table>
@@ -68,6 +61,6 @@
 
 {% block customscript %}
 <script>
-  $('#table-movie').DataTable();
+  $('#table-link').DataTable();
 </script>
 {% endblock customscript %}
