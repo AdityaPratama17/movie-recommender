@@ -19,7 +19,14 @@ urlpatterns = [
     path('ubah-movie', views.ubah_movie, name='ubah-movie'),
     path('hapus-movie', views.hapus_movie, name='hapus-movie'),
 
-
+    #tag
     path('tag/', views.tag, name="tag"),
-    path('rank/', views.rank, name="rank"),
+    path('istagby-tag', views.istagby_tag, name='istagby-tag'),
+    path('ubah-tag', views.ubah_tag, name='ubah-tag'),
+    path('hapus-tag', views.hapus_tag, name='hapus-tag'),
+
+    #rate
+    path('rate/', views.rate, name="rate"),
+    path('give-rate', views.give_rate, name='give-rate'),
+    path('getuser-rate', views.getuser_rate, name='getuser-rate'),
 ]

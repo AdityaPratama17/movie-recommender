@@ -3,8 +3,8 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from neo4j import GraphDatabase
 
-graphdb = GraphDatabase.driver(uri="bolt://localhost:11003", auth=("neo4j","1234"))
-# graphdb = GraphDatabase.driver(uri="bolt://localhost:7687", auth=("neo4j","1234"))
+# graphdb = GraphDatabase.driver(uri="bolt://localhost:11003", auth=("neo4j","1234"))
+graphdb = GraphDatabase.driver(uri="bolt://localhost:7687", auth=("neo4j","1234"))
 session = graphdb.session()
 
 def recommender_index(request):
