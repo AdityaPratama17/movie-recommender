@@ -44,7 +44,7 @@ def istagby_tag(request):
     return HttpResponseRedirect('/tag')
 
 def ubah_tag(request):
-    if request.POST['old_tag']==request.POST['old_tag']: 
+    if request.POST['old_tag']==request.POST['tag']: 
         return HttpResponseRedirect('/tag')
 
     session = graphdb.session()
