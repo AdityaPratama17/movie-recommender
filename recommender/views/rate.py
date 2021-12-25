@@ -26,7 +26,7 @@ def rate(request):
 
     context ={
         'isRate' : True,
-        'title' : 'Ranting',
+        'title' : 'Rate',
         'data':data,
         'movies':movies
     }
@@ -56,5 +56,4 @@ def getuser_rate(request):
     data = {
         'data':data
     }
-
     return JsonResponse(data)

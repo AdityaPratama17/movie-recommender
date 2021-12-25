@@ -42,7 +42,7 @@
                     <th>ID Movie</th>
                     <th>Title</th>
                     <th>Is Rating By</th>
-                    <th>Rating</th>
+                    <th class="text-center">Average Rating</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -52,7 +52,7 @@
                     <td>{{ d.id_movie }}</td>
                     <td>{{ d.title }}</td>
                     <td>{{ d.tot }}</td>
-                    <td class="text-warning"><i class="fas fa-star"></i> {{ d.avg|floatformat }}</td>
+                    <td class="text-warning text-center"><i class="fas fa-star"></i> {{ d.avg|floatformat }}</td>
                   </tr>
                   {% endfor %}
                 </tbody>

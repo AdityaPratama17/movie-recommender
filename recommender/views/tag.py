@@ -44,7 +44,9 @@ def istagby_tag(request):
     return HttpResponseRedirect('/tag')
 
 def ubah_tag(request):
-    print(request.POST)
+    if request.POST['old_tag']==request.POST['old_tag']: 
+        return HttpResponseRedirect('/tag')
+
     session = graphdb.session()
     query = """
     MATCH (m:Movie{ID:'"""+str(request.POST['movie_id'])+"""'})-[r:isTaggedBy {Tag:'"""+str(request.POST['old_tag'])+"""'}]->(u:User{ID:'"""+str(request.POST['user_id'])+"""'})

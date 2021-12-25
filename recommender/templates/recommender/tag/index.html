@@ -157,7 +157,7 @@
         {% csrf_token %}
         <div class="modal-body">
           <div class="mb-3">
-            <p>Yakin hapus data tag?</p>
+            <p>Yakin hapus data tag <span id="span_hapus"></span>?</p>
             <input type="hidden" name="user_id" class="user_id">
             <input type="hidden" name="movie_id" class="movie_id">
             <input type="hidden" name="tag" class="tag">
@@ -212,6 +212,7 @@
     $('.movie_id').val(id_movie)
     $('.old_tag').val(tag)
     $('.tag').val(tag)
+    $("#span_hapus").text(tag);
     $('#modal-update').modal('show')
   }
 </script>
