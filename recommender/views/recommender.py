@@ -3,8 +3,8 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from neo4j import GraphDatabase
 
-# graphdb = GraphDatabase.driver(uri="bolt://localhost:11003", auth=("neo4j","1234"))
-graphdb = GraphDatabase.driver(uri="bolt://localhost:7687", auth=("neo4j","1234"))
+graphdb = GraphDatabase.driver(uri="bolt://localhost:11003", auth=("neo4j","1234"))
+# graphdb = GraphDatabase.driver(uri="bolt://localhost:7687", auth=("neo4j","1234"))
 session = graphdb.session()
 
 def recommender_index(request):
@@ -287,7 +287,7 @@ def tambah_user(request):
     """
     session.run(query)
 
-    return HttpResponseRedirect('/')
+    return HttpResponseRedirect('/recommender')
 
 
 def ubah_user(request):
@@ -296,7 +296,7 @@ def ubah_user(request):
     """
     session.run(query)
 
-    return HttpResponseRedirect('/')
+    return HttpResponseRedirect('/recommender')
 
 
 def hapus_user(request):
@@ -306,4 +306,4 @@ def hapus_user(request):
     """
     session.run(query)
 
-    return HttpResponseRedirect('/')
+    return HttpResponseRedirect('/recommender')

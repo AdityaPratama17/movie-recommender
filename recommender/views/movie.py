@@ -3,8 +3,8 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from neo4j import GraphDatabase
 
-# graphdb = GraphDatabase.driver(uri="bolt://localhost:11003", auth=("neo4j","1234"))
-graphdb = GraphDatabase.driver(uri="bolt://localhost:7687", auth=("neo4j","1234"))
+graphdb = GraphDatabase.driver(uri="bolt://localhost:11003", auth=("neo4j","1234"))
+# graphdb = GraphDatabase.driver(uri="bolt://localhost:7687", auth=("neo4j","1234"))
 session = graphdb.session()
 
 def movie(request):
@@ -56,7 +56,7 @@ def tambah_movie(request):
         """
         session.run(query)
 
-    return HttpResponseRedirect('/movie')
+    return HttpResponseRedirect('/recommender/movie')
 
 
 def ubah_movie(request):
@@ -87,7 +87,7 @@ def ubah_movie(request):
         """
         session.run(query)
 
-    return HttpResponseRedirect('/movie')
+    return HttpResponseRedirect('/recommender/movie')
 
 
 def hapus_movie(request):
@@ -103,4 +103,4 @@ def hapus_movie(request):
     """
     session.run(query)
 
-    return HttpResponseRedirect('/movie')
+    return HttpResponseRedirect('/recommender/movie')

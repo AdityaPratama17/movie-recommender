@@ -4,8 +4,8 @@ from django.http.response import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 from neo4j import GraphDatabase
 
- # graphdb = GraphDatabase.driver(uri="bolt://localhost:11003", auth=("neo4j","1234"))
-graphdb = GraphDatabase.driver(uri="bolt://localhost:7687", auth=("neo4j","1234"))
+graphdb = GraphDatabase.driver(uri="bolt://localhost:11003", auth=("neo4j","1234"))
+# graphdb = GraphDatabase.driver(uri="bolt://localhost:7687", auth=("neo4j","1234"))
 
 def rate(request):
     session = graphdb.session()
@@ -40,7 +40,7 @@ def give_rate(request):
     merge (u)-[r:givesRating {Rating:"""+request.POST['rating']+""",TimeStamp:'"""+str(timestamp)+"""' }]->(m)
     """
     session.run(query)
-    return HttpResponseRedirect('/rate')
+    return HttpResponseRedirect('/recommender/rate/')
 
 def getuser_rate(request):
     session = graphdb.session()
