@@ -13,7 +13,7 @@
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
     <!-- Style CSS -->
     <link rel="stylesheet" href="{%static 'recommender/styles/style.css'%}">
-    <title>Register</title>
+    <title>Login</title>
 </head>
 
 <body style='background-color:rgb(237, 240, 252);'>
@@ -30,26 +30,22 @@
                             <div class="col-md-7 pr-3 pl-3">
                                 <div class="card-body">
                                     <h2 class="card-title mb-5 mt-4">Login</h2>
-                                    <form action="" method="post">
+                                    <form action="{% url 'login' %}" method="post">
+                                        {% csrf_token %}
                                         <div class="row pb-2">
                                             <div class="col">
-                                                <input type="text" class="form-control rounded-pill" name="id_user"
-                                                    id="id_user" placeholder="Id User">
+                                                <input type="text" class="form-control rounded-pill" name="id_user" id="id_user" placeholder="Id User" required>
                                             </div>
                                         </div>
                                         <div class="row pb-2">
                                             <div class="col">
-                                                <input type="password" class="form-control rounded-pill" name="password"
-                                                    id="password" placeholder="Password">
+                                                <input type="password" class="form-control rounded-pill" name="password" id="password" placeholder="Password" required>
                                             </div>
                                         </div>
                                         <div class="row mb-2 p-2">
-                                            <button type="submit"
-                                                class="btn rounded-pill btn-custom-primary">Login</button>
+                                            <button type="submit" class="btn rounded-pill btn-custom-primary">Login</button>
                                         </div>
-                                        <p class="text-center mb-3">Belum punya akun ? <a
-                                                href="{%url 'register'%}"><span
-                                                    class="color-primary-custom fw-bold">Daftar di sini</span></a></p>
+                                        <p class="text-center mb-3">Belum punya akun ? <a href="{%url 'register'%}"><span class="color-primary-custom fw-bold">Daftar di sini</span></a></p>
                                     </form>
                                 </div>
                             </div>

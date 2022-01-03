@@ -1,42 +1,46 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
-import time
+import time, re
 from neo4j import GraphDatabase
 
 graphdb = GraphDatabase.driver(uri="bolt://localhost:11003", auth=("neo4j","1234"))
 # graphdb = GraphDatabase.driver(uri="bolt://localhost:7687", auth=("neo4j","1234"))
 session = graphdb.session()
-id = 777
 
 def index(request):
-    # id = 424
+    if 'id_user' in request.session:
+        id = request.session['id_user']
 
-    query = """
-    OPTIONAL MATCH (u:User{ID:'"""+str(id)+"""'})-[r:givesRating]->(m:Movie)
-    WITH COUNT(m) as jumRating
-    OPTIONAL MATCH (u2:User{ID:'"""+str(id)+"""'})<-[r2:isTaggedBy]-(m2:Movie)
-    RETURN jumRating, COUNT(m2) as jumTag
-    """
-    hasil = session.run(query)
-    for i in hasil:
-        jum_rating = i.data()["jumRating"]
-        jum_tag = i.data()["jumTag"]
+        query = """
+        OPTIONAL MATCH (u:User{ID:'"""+str(id)+"""'})-[r:givesRating]->(m:Movie)
+        WITH COUNT(m) as jumRating
+        OPTIONAL MATCH (u2:User{ID:'"""+str(id)+"""'})<-[r2:isTaggedBy]-(m2:Movie)
+        RETURN jumRating, COUNT(m2) as jumTag
+        """
+        hasil = session.run(query)
+        for i in hasil:
+            jum_rating = i.data()["jumRating"]
+            jum_tag = i.data()["jumTag"]
 
-    # movie by recommendation
-    if jum_tag==0 and jum_rating==0:
-        movie_rekomendasi = False
-    elif jum_tag>0 and jum_rating==0:
-        movie_rekomendasi = rekomendasi_0(id)
-    elif jum_tag>0 and jum_rating==1:
-        movie_rekomendasi = rekomendasi_1(id)
-    elif jum_tag>0 and jum_rating>1:
-        movie_rekomendasi = rekomendasi_2(id)
+        # movie by recommendation
+        if jum_tag==0 and jum_rating==0:
+            movie_rekomendasi = False
+        elif jum_tag>0 and jum_rating==0:
+            movie_rekomendasi = rekomendasi_0(id)
+        elif jum_rating==1:
+            movie_rekomendasi = rekomendasi_1(id)
+        elif jum_rating>1:
+            movie_rekomendasi = rekomendasi_2(id)
 
-    # movie recommendation by genre fav
-    if jum_tag==0 and jum_rating==0:
-        movie_genre = False
+        # movie recommendation by genre fav
+        if jum_tag==0 and jum_rating==0:
+            movie_genre = False
+        else:
+            movie_genre = genre_favorite(id)
+
     else:
-        movie_genre = genre_favorite(id)
+        movie_genre = False
+        movie_rekomendasi = False
 
     # top rated movies
     movie_top = top_rated()
@@ -303,18 +307,91 @@ def rekomendasi_2(id):
     return movie_selected
 
 def user_add_tag(request):
-    # id = 424
-    
-    timestamp = int(time.time())
-    query = """
-    MATCH (u:User{ID:'"""+str(id)+"""'}), (m:Movie{ID:'"""+str(request.POST['id_movie'])+"""'})
-    merge (u)<-[r:isTaggedBy {Tag:'"""+str(request.POST['tag'])+"""',TimeStamp:'"""+str(timestamp)+"""' }]-(m)
-    """
-    session.run(query)
-    return HttpResponseRedirect('/')
+    if 'id_user' not in request.session:
+        return redirect('login')
+    else:
+        id = request.session['id_user']
+        
+        timestamp = int(time.time())
+        query = """
+        MATCH (u:User{ID:'"""+str(id)+"""'}), (m:Movie{ID:'"""+str(request.POST['id_movie'])+"""'})
+        merge (u)<-[r:isTaggedBy {Tag:'"""+str(request.POST['tag'])+"""',TimeStamp:'"""+str(timestamp)+"""' }]-(m)
+        """
+        session.run(query)
+        return redirect('home')
+
+def user_add_rate(request):
+    if 'id_user' not in request.session:
+        return redirect('login')
+    else:
+        id = request.session['id_user']
+        
+        timestamp = int(time.time())
+        query = """
+        MATCH (u:User{ID:'"""+str(id)+"""'})-[r:givesRating]->(m:Movie{ID:'"""+str(request.POST['id_movie'])+"""'}) 
+        set r.Rating="""+str(request.POST['rating'])+""", r.TimeStamp='"""+str(timestamp)+"""'
+        return count(r) as jum
+        """
+        hasil = session.run(query)
+
+        if hasil.single()['jum'] == 0:
+            query = """
+            MATCH (u:User{ID:'"""+str(id)+"""'}), (m:Movie{ID:'"""+str(request.POST['id_movie'])+"""'})
+            merge (u)-[r:givesRating {Rating:toFloat("""+request.POST['rating']+"""),TimeStamp:'"""+str(timestamp)+"""' }]->(m)
+            """
+            session.run(query)
+        return redirect('home')
 
 def register(request):
+    if request.method == "POST":
+        print(request.POST['id_user'])
+        print(request.POST['password'])
+        print(request.POST['confirm_password'])
+        if re.search('[a-zA-Z]', request.POST['id_user']) or request.POST['password'] != request.POST['confirm_password']:
+            return redirect('register')
+        else:
+            query = """
+            MATCH (u:User{ID:'"""+str(request.POST['id_user'])+"""'})
+            return count(u) as jum
+            """
+            hasil = session.run(query)
+            
+            if hasil.single()['jum'] != 0:
+                return redirect('register')
+            else:
+                query = """
+                CREATE (u:User{ID:'"""+str(request.POST['id_user'])+"""', password:'"""+str(request.POST['password'])+"""', role:'user'})
+                """
+                session.run(query)
+                return redirect('login')
+
     return render(request, 'register.html')
 
 def login(request):
+    if 'id_user' in request.session:
+        del request.session['id_user']
+
+    if request.method == "POST":
+        query = """
+        MATCH (u:User{ID:'"""+str(request.POST['id_user'])+"""', password:'"""+str(request.POST['password'])+"""'})
+        return count(u) as jum, u.role as role
+        """
+        hasil = session.run(query)
+        for i in hasil: 
+            jum = i.data()['jum']
+            role = i.data()['role']
+
+        if jum == 1:
+            request.session['id_user'] = request.POST['id_user']
+            if role == 'user':
+                return redirect('home')
+            else:
+                return redirect('recommender:recommender_index')
+        else:
+            return redirect('login')
+
     return render(request, 'login.html')
+
+def logout(request):
+    del request.session['id_user']
+    return redirect('home')

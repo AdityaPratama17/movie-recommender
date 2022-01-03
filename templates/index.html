@@ -14,7 +14,7 @@
             </div>
             <div class="row">
                 {% for key, value in movie_rekomendasi.items %}
-                <div class="card" style="width: 13rem; padding-left: 0; padding-right: 0;">
+                <div class="card mb-3" style="width: 13rem; padding-left: 0; padding-right: 0;">
                     <img src="{%static 'recommender/img/img-movie2.jpg'%}" class="card-img-top" alt="...">
                     <div class="card-body">
                         <div class="row rate">
@@ -23,8 +23,7 @@
                             </div>
                             <div class="col-md-6 d-flex justify-content-end">
                                 <div class="float-right">
-                                    <a href="#" class="text-right color-primary-custom" data-bs-toggle="modal"
-                                        data-bs-target="#modal-rating"><i class="far fa-star"></i></a>
+                                    <a type="button" class="text-right color-primary-custom" data-bs-toggle="modal" data-bs-target="#modal-rating" onclick="addRate('{{ key }}')"><i class="far fa-star"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -42,8 +41,8 @@
                                 <a href="https://www.themoviedb.org/movie/{{ value.tmdb }}" target="_blank" class="btn rounded-pill btn-outline-sm-custom-primary">TMDB</a>
                             </div>
                             <div class="col-md-4 d-flex justify-content-end">
-                                <a href="#" class="color-primary-custom"><i class="fas fa-info-circle"></i></a>
-                                <a type="button" class="color-primary-custom tag modal-tag" data-bs-toggle="modal" data-bs-target="#modal-tag" onclick="detailTag('{{ key }}')"><i class="fas fa-tags"></i></a>
+                                <a type="button" class="color-primary-custom" data-bs-toggle="modal" data-bs-target="#modal-detail" onclick="detailMovie('{{ value.title }}','{{ value.genre }}','{{ value.avg|floatformat:1 }}','{{ value.imdb }}','{{ value.tmdb }}')"><i class="fas fa-info-circle"></i></a>
+                                <a type="button" class="color-primary-custom tag modal-tag" data-bs-toggle="modal" data-bs-target="#modal-tag" onclick="addTag('{{ key }}')"><i class="fas fa-tags"></i></a>
                             </div>
                         </div>
                     </div>
@@ -62,7 +61,7 @@
             </div>
             <div class="row">
                 {% for key, value in movie_genre.items %}
-                <div class="card" style="width: 13rem; padding-left: 0; padding-right: 0;">
+                <div class="card mb-3" style="width: 13rem; padding-left: 0; padding-right: 0;">
                     <img src="{%static 'recommender/img/img-movie2.jpg'%}" class="card-img-top" alt="...">
                     <div class="card-body">
                         <div class="row rate">
@@ -71,8 +70,7 @@
                             </div>
                             <div class="col-md-6 d-flex justify-content-end">
                                 <div class="float-right">
-                                    <a href="#" class="text-right color-primary-custom" data-bs-toggle="modal"
-                                        data-bs-target="#modal-rating"><i class="far fa-star"></i></a>
+                                    <a type="button" class="text-right color-primary-custom" data-bs-toggle="modal" data-bs-target="#modal-rating" onclick="addRate('{{ key }}')"><i class="far fa-star"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -90,8 +88,8 @@
                                 <a href="https://www.themoviedb.org/movie/{{ value.tmdb }}" target="_blank" class="btn rounded-pill btn-outline-sm-custom-primary">TMDB</a>
                             </div>
                             <div class="col-md-4 d-flex justify-content-end">
-                                <a href="#" class="color-primary-custom"><i class="fas fa-info-circle"></i></a>
-                                <a type="button" class="color-primary-custom tag modal-tag" data-bs-toggle="modal" data-bs-target="#modal-tag" onclick="detailTag('{{ key }}')"><i class="fas fa-tags"></i></a>
+                                <a type="button" class="color-primary-custom" data-bs-toggle="modal" data-bs-target="#modal-detail" onclick="detailMovie('{{ value.title }}','{{ value.genre }}','{{ value.avg|floatformat:1 }}','{{ value.imdb }}','{{ value.tmdb }}')"><i class="fas fa-info-circle"></i></a>
+                                <a type="button" class="color-primary-custom tag modal-tag" data-bs-toggle="modal" data-bs-target="#modal-tag" onclick="addTag('{{ key }}')"><i class="fas fa-tags"></i></a>
                             </div>
                         </div>
                     </div>
@@ -109,7 +107,7 @@
             </div>
             <div class="row">
                 {% for key, value in movie_top.items %}
-                <div class="card" style="width: 13rem; padding-left: 0; padding-right: 0;">
+                <div class="card mb-3" style="width: 13rem; padding-left: 0; padding-right: 0;">
                     <img src="{%static 'recommender/img/img-movie2.jpg'%}" class="card-img-top" alt="...">
                     <div class="card-body">
                         <div class="row rate">
@@ -118,8 +116,7 @@
                             </div>
                             <div class="col-md-6 d-flex justify-content-end">
                                 <div class="float-right">
-                                    <a href="#" class="text-right color-primary-custom" data-bs-toggle="modal"
-                                        data-bs-target="#modal-rating"><i class="far fa-star"></i></a>
+                                    <a type="button" class="text-right color-primary-custom" data-bs-toggle="modal" data-bs-target="#modal-rating" onclick="addRate('{{ key }}')"><i class="far fa-star"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -137,8 +134,8 @@
                                 <a href="https://www.themoviedb.org/movie/{{ value.tmdb }}" target="_blank" class="btn rounded-pill btn-outline-sm-custom-primary">TMDB</a>
                             </div>
                             <div class="col-md-4 d-flex justify-content-end">
-                                <a href="#" class="color-primary-custom"><i class="fas fa-info-circle"></i></a>
-                                <a type="button" class="color-primary-custom tag modal-tag" data-bs-toggle="modal" data-bs-target="#modal-tag" onclick="detailTag('{{ key }}')"><i class="fas fa-tags"></i></a>
+                                <a type="button" class="color-primary-custom" data-bs-toggle="modal" data-bs-target="#modal-detail" onclick="detailMovie('{{ value.title }}','{{ value.genre }}','{{ value.avg|floatformat:1 }}','{{ value.imdb }}','{{ value.tmdb }}')"><i class="fas fa-info-circle"></i></a>
+                                <a type="button" class="color-primary-custom tag modal-tag" data-bs-toggle="modal" data-bs-target="#modal-tag" onclick="addTag('{{ key }}')"><i class="fas fa-tags"></i></a>
                             </div>
                         </div>
                     </div>
@@ -158,15 +155,18 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body text-center">
-                <form action="">
-                    <div class="row pb-2">
-                        <div class="col d-flex justify-content-center">
-                            <p class="color-secondary-custom fs-1 p-2"><i class="far fa-star"></i></p>
-                            <p class="color-secondary-custom fs-1 p-2"><i class="far fa-star"></i></p>
-                            <p class="color-secondary-custom fs-1 p-2"><i class="far fa-star"></i></p>
-                            <p class="color-secondary-custom fs-1 p-2"><i class="far fa-star"></i></p>
-                            <p class="color-secondary-custom fs-1 p-2"><i class="far fa-star"></i></p>
-                        </div>
+                <form action="{% url 'user_add_rate' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" class="id_movie_rate" name="id_movie">
+                    <div class="row p-2">
+                        <select name="rating" class="form-control select2" required>
+                            <option value="">Berikan Rating</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
                     </div>
                     <button type="submit" class="btn rounded-pill btn-custom-primary mt-3 mb-2">Give Rate</button>
                 </form>
@@ -196,13 +196,71 @@
         </div>
     </div>
 </div>
+
+<!-- Modal detail -->
+<div class="modal fade" id="modal-detail" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-center w-100" id="exampleModalLabel">Detail Movie</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row pb-2 m-2">
+                    <table class="table table-borderless">
+                        <tbody>
+                            <tr>
+                                <th scope="row">Judul</th>
+                                <td>:</td>
+                                <td><span id="title_detail"></span></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Genre</th>
+                                <td>:</td>
+                                <td><span id="genre_detail"></span></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Rating</th>
+                                <td>:</td>
+                                <td><span id="rate_detail"></span> / 5.0</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">IMDB ID</th>
+                                <td>:</td>
+                                <td><span id="imdb_detail"></span></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">TMDB ID</th>
+                                <td>:</td>
+                                <td><span id="tmdb_detail"></span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock movie %}
 
 
 {% block scripts %}
 <script>
-function detailTag(id) {
+function addTag(id) {
     $('.id_movie_tag').val(id)
+}
+
+function addRate(id) {
+    $('.id_movie_rate').val(id)
+}
+
+function detailMovie(title, genre, rate, imdb, tmdb) {
+    // console.log(title)
+    $('#title_detail').text(title)
+    $('#genre_detail').text(genre)
+    $('#rate_detail').text(rate)
+    $('#imdb_detail').text(imdb)
+    $('#tmdb_detail').text(tmdb)
 }
 </script>
 {% endblock scripts %}

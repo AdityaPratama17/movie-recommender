@@ -30,32 +30,28 @@
                             <div class="col-md-7 pr-3 pl-3">
                                 <div class="card-body">
                                     <h2 class="card-title mb-5 mt-4">Registrasi</h2>
-                                    <form action="" method="post">
+                                    <form action="{% url 'register' %}" method="post">
+                                        {% csrf_token %}
                                         <div class="row pb-2">
                                             <div class="col">
-                                                <input type="text" class="form-control rounded-pill" name="id_user"
-                                                    id="id_user" placeholder="Id User">
+                                                <input type="text" class="form-control rounded-pill" name="id_user" id="id_user" placeholder="Id User">
                                             </div>
                                         </div>
                                         <div class="row pb-2">
                                             <div class="col">
-                                                <input type="password" class="form-control rounded-pill" name="password"
-                                                    id="password" placeholder="Password">
+                                                <input type="password" class="form-control rounded-pill" name="password" id="password" placeholder="Password">
                                             </div>
                                         </div>
                                         <div class="row pb-2">
                                             <div class="col">
-                                                <input type="password" class="form-control rounded-pill"
-                                                    name="confirm_password" id="confirm_password"
-                                                    placeholder="Konfirmasi Password">
+                                                <input type="password" class="form-control rounded-pill" name="confirm_password" id="confirm_password" placeholder="Konfirmasi Password">
                                             </div>
                                         </div>
                                         <div class="row mb-2 p-2">
                                             <button type="submit"
                                                 class="btn rounded-pill btn-custom-primary">Register</button>
                                         </div>
-                                        <p class="text-center mb-4">Sudah punya akun ? <a href="{%url 'login'%}"><span
-                                                    class="color-primary-custom fw-bold">Login di sini</span></a></p>
+                                        <p class="text-center mb-4">Sudah punya akun ? <a href="{%url 'login'%}"><span class="color-primary-custom fw-bold">Login di sini</span></a></p>
                                     </form>
                                 </div>
                             </div>

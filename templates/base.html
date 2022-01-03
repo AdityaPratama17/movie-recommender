@@ -49,9 +49,12 @@
                         <a href="#contact" class="nav-link m-2 menu-item">Contact</a>
                     </li>
                     <li class="nav-item">
+                        
+                        {% if 'id_user' in request.session %}
+                        <a href="{%url 'logout'%}" class="nav-link m-2 menu-item">Logout</a>
+                        {% else %}
                         <a href="{%url 'login'%}" class="nav-link m-2 menu-item">Login</a>
-                        <!-- <a href="{%url 'login'%}" class="nav-link m-2 menu-item" data-bs-toggle="modal"
-                            data-bs-target="#modal-login">Login</a> -->
+                        {% endif %}
                     </li>
                 </ul>
             </div>
@@ -71,7 +74,7 @@
                             <div class="row">
                                 <div class="col-md-10">
                                     <input type="text" name="" id="" class="form-control rounded-pill"
-                                        placeholder="cari judul movie">
+                                        placeholder="cari judul atau genre movie">
                                 </div>
                                 <div class="col-md-1">
                                     <button type="submit" class="btn btn-custom-primary rounded-pill">Search</button>
