@@ -4,8 +4,8 @@ from django.http.response import HttpResponseRedirect
 from django.shortcuts import render
 from neo4j import GraphDatabase
 
-# graphdb = GraphDatabase.driver(uri="bolt://localhost:11003", auth=("neo4j","1234"))
-graphdb = GraphDatabase.driver(uri="bolt://localhost:7687", auth=("neo4j","1234"))
+graphdb = GraphDatabase.driver(uri="bolt://localhost:11003", auth=("neo4j","1234"))
+# graphdb = GraphDatabase.driver(uri="bolt://localhost:7687", auth=("neo4j","1234"))
 
 def tag(request):
     session = graphdb.session()
@@ -45,7 +45,7 @@ def istagby_tag(request):
 
 def ubah_tag(request):
     if request.POST['old_tag']==request.POST['tag']: 
-        return HttpResponseRedirect('/tag')
+        return HttpResponseRedirect('/recommender/tag')
 
     session = graphdb.session()
     query = """
@@ -53,7 +53,7 @@ def ubah_tag(request):
     SET r.Tag = '"""+str(request.POST['tag'])+"""'
     """
     session.run(query)  
-    return HttpResponseRedirect('/tag')
+    return HttpResponseRedirect('/recommender/tag')
 
 def hapus_tag(request):
     session = graphdb.session()
@@ -62,4 +62,4 @@ def hapus_tag(request):
     DELETE r
     """
     session.run(query)  
-    return HttpResponseRedirect('/tag')
+    return HttpResponseRedirect('/recommender/tag')

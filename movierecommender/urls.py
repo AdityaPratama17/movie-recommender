@@ -20,7 +20,10 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('recommender/', include(('recommender.urls','recommender'), namespace='recommender')),
-    path('', views.index),
+    path('', views.index, name='home'),
     path('register/', views.register, name='register'),
     path('login/', views.login, name='login'),
+    path('logout/', views.logout, name='logout'),
+    path('user_add_tag/', views.user_add_tag, name='user_add_tag'),
+    path('user_add_rate/', views.user_add_rate, name='user_add_rate'),
 ]

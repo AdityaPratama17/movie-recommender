@@ -1,401 +1,267 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootsrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-
-    <!-- Google Fonts -->
-    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
-
-    <!-- Style CSS -->
-    <link rel="stylesheet" href="{%static 'recommender/styles/style.css'%}">
-
-    <!-- Font Awesome -->
-    <script src="https://kit.fontawesome.com/fe118aecdc.js" crossorigin="anonymous"></script>
-
-    <!-- Aos Animation -->
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-
-    <title>Home</title>
-</head>
-
-<body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-custom  fixed-top shadow-sm">
-        <div class="container">
-            <a class="navbar-brand" href="#">M.Graph</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"><i class="fas fa-bars"></i></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <ul class="navbar-nav ms-auto flex-nowrap">
-                    <li class="nav-item home nav-active">
-                        <a href="#home" class="nav-link m-2 menu-item">Home</a>
-                    </li>
-                    <li class="nav-item movie">
-                        <a href="#movie" class="nav-link m-2 menu-item">Movie</a>
-                    </li>
-                    <li class="nav-item about">
-                        <a href="#about" class="nav-link m-2 menu-item">About</a>
-                    </li>
-                    <li class="nav-item contact">
-                        <a href="#contact" class="nav-link m-2 menu-item">Contact</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{%url 'login'%}" class="nav-link m-2 menu-item">Login</a>
-                        <!-- <a href="{%url 'login'%}" class="nav-link m-2 menu-item" data-bs-toggle="modal"
-                            data-bs-target="#modal-login">Login</a> -->
-                    </li>
-                </ul>
+{% block movie %}
+<!-- Movie -->
+<section class="movie pb-5 pt-5" id="movie">
+    <div class="container">
+        
+        {% if movie_rekomendasi %}
+        <div class="row mb-5">
+            <div class="row">
+                <h4 class="title-movie">Recommendation</h4>
+                <hr class="hr-left rounded-pill">
             </div>
-        </div>
-    </nav>
-
-    <!-- Cover Header -->''
-    <section class="header" id="home">
-        <div class="overplay">
-            <div class="container">
-                <div class="row text-header">
-                    <div class="col-sm align-self-center" data-aos="fade-right">
-                        <h1 class="color-primary-custom-tint">Selamat Datang.</h1>
-                        <p class="mt-3 text-light">Berbagai jenis movie dengan pencarian yang cepat, Explore sekarang.
-                        </p>
-                        <form action="" method="get">
-                            <div class="row">
-                                <div class="col-md-10">
-                                    <input type="text" name="" id="" class="form-control rounded-pill"
-                                        placeholder="cari judul movie">
-                                </div>
-                                <div class="col-md-1">
-                                    <button type="submit" class="btn btn-custom-primary rounded-pill">Search</button>
-                                </div>
+            <div class="row">
+                {% for key, value in movie_rekomendasi.items %}
+                <div class="card mb-3" style="width: 13rem; padding-left: 0; padding-right: 0;">
+                    <img src="{%static 'recommender/img/img-movie2.jpg'%}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <div class="row rate">
+                            <div class="col-md-6">
+                                <p class="color-secondary-custom"><i class="fas fa-star"></i> {{ value.avg|floatformat:1 }}</p>
                             </div>
-
-                        </form>
-                        <a href="#movie" class="btn rounded-pill btn-outline-custom-primary mt-5">Lihat Movie</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Movie -->
-    <section class="movie pb-5 pt-5" id="movie">
-        <div class="container">
-            <!-- Recommendation -->
-            <div class="row mb-5">
-                <div class="row">
-                    <h4 class="title-movie">Recommendation</h4>
-                    <hr class="hr-left rounded-pill">
-                </div>
-                <div class="row">
-                    <div class="card" style="width: 13rem; padding-left: 0; padding-right: 0;">
-                        <img src="{%static 'recommender/img/img-movie2.jpg'%}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <div class="row rate">
-                                <div class="col-md-6">
-                                    <p class="color-secondary-custom"><i class="fas fa-star"></i> 4.5</p>
+                            <div class="col-md-6 d-flex justify-content-end">
+                                <div class="float-right">
+                                    <a type="button" class="text-right color-primary-custom" data-bs-toggle="modal" data-bs-target="#modal-rating" onclick="addRate('{{ key }}')"><i class="far fa-star"></i></a>
                                 </div>
-                                <div class="col-md-6 d-flex justify-content-end">
-                                    <div class="float-right">
-                                        <a href="#" class="text-right color-primary-custom" data-bs-toggle="modal"
-                                            data-bs-target="#modal-rating"><i class="far fa-star"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 rateby">
-                                    <p><i class="fas fa-users"></i> 200</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <h6 class="card-title">Movie Title</h6>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-8">
-                                    <a href="#" class="btn rounded-pill btn-outline-sm-custom-primary">IMDB</a>
-                                    <a href="#" class="btn rounded-pill btn-outline-sm-custom-primary">TMDB</a>
-                                </div>
-                                <div class="col-md-4 d-flex justify-content-end">
-                                    <a href="#" class="color-primary-custom"><i class="fas fa-info-circle"></i></a>
-                                    <a href="#" class="color-primary-custom tag" data-bs-toggle="modal"
-                                        data-bs-target="#modal-tag"><i class="fas fa-tags"></i></a>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Genre Favorite -->
-            <div class="row mb-5">
-                <div class="row">
-                    <h4 class="title-movie">Genre Favorite</h4>
-                    <hr class="hr-left rounded-pill">
-                </div>
-                <div class="row">
-                    <div class="card" style="width: 13rem; padding-left: 0; padding-right: 0;">
-                        <img src="{%static 'recommender/img/img-movie2.jpg'%}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <div class="row rate">
-                                <div class="col-md-6">
-                                    <p class="color-secondary-custom"><i class="fas fa-star"></i> 4.5</p>
-                                </div>
-                                <div class="col-md-6 d-flex justify-content-end">
-                                    <div class="float-right">
-                                        <a href="#" class="text-right color-primary-custom" data-bs-toggle="modal"
-                                            data-bs-target="#modal-rating"><i class="far fa-star"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 rateby">
-                                    <p><i class="fas fa-users"></i> 200</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <h6 class="card-title">Movie Title</h6>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-8">
-                                    <a href="#" class="btn rounded-pill btn-outline-sm-custom-primary">IMDB</a>
-                                    <a href="#" class="btn rounded-pill btn-outline-sm-custom-primary">TMDB</a>
-                                </div>
-                                <div class="col-md-4 d-flex justify-content-end">
-                                    <a href="#" class="color-primary-custom"><i class="fas fa-info-circle"></i></a>
-                                    <a href="#" class="color-primary-custom tag" data-bs-toggle="modal"
-                                        data-bs-target="#modal-tag"><i class="fas fa-tags"></i></a>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Top Rate -->
-            <div class="row mb-5">
-                <div class="row">
-                    <h4 class="title-movie">Top Rated Movie</h4>
-                    <hr class="hr-left rounded-pill">
-                </div>
-                <div class="row">
-                    <div class="card" style="width: 13rem; padding-left: 0; padding-right: 0;">
-                        <img src="{%static 'recommender/img/img-movie2.jpg'%}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <div class="row rate">
-                                <div class="col-md-6">
-                                    <p class="color-secondary-custom"><i class="fas fa-star"></i> 4.5</p>
-                                </div>
-                                <div class="col-md-6 d-flex justify-content-end">
-                                    <div class="float-right">
-                                        <a href="#" class="text-right color-primary-custom" data-bs-toggle="modal"
-                                            data-bs-target="#modal-rating"><i class="far fa-star"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 rateby">
-                                    <p><i class="fas fa-users"></i> 200</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <h6 class="card-title">Movie Title</h6>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-8">
-                                    <a href="#" class="btn rounded-pill btn-outline-sm-custom-primary">IMDB</a>
-                                    <a href="#" class="btn rounded-pill btn-outline-sm-custom-primary">TMDB</a>
-                                </div>
-                                <div class="col-md-4 d-flex justify-content-end">
-                                    <a href="#" class="color-primary-custom"><i class="fas fa-info-circle"></i></a>
-                                    <a href="#" class="color-primary-custom tag" data-bs-toggle="modal"
-                                        data-bs-target="#modal-tag"><i class="fas fa-tags"></i></a>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-    <!-- about -->
-    <section class="about pb-5 pt-5 bg-primary-custom" id="about">
-        <div class="container">
-            <div class="row" data-aos="fade-up">
-                <div class="col-sm text-center">
-                    <img class="vector_about" src="{%static 'recommender/img/logo2.png'%}" alt="vector about">
-                </div>
-                <div class="col-sm align-self-center text-about">
-                    <h1 class="color-primary-custom-tint">About M.Graph</h1>
-                    <hr class="hr-left rounded-pill">
-                    <p class="text-white">M.Graph adalah platform comunity yang dikembangkan untuk membuat sistem
-                        rekomendasi movie menggunkan graph database.
-                        Graph Database dipilih karena proses query data yang cepat dan fleksibel.
-                    </p>
-                    <p class="text-white">Algoritma yang digunakan dalam memberikan rekomendasi adalah Content Base
-                        Filtering dan Collaborative Filtering.
-                        Kami sangat mengharapkan antusias kalian untuk bergabung bersama kami untuk mengembangkan
-                        platform ini lebih baik kedepannya.
-                    </p>
-                    <a href="{%url 'login'%}" class="btn rounded-pill btn-custom-primary mt-3 mb-2">Join With Us</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact -->
-    <section class="contact pt-5 pb-5" id="contact">
-        <div class="container">
-            <div class="row justify-content-center" data-aos="fade-up">
-                <div class="col-sm-5 information-contact">
-                    <h1 class="color-primary-custom">Contact</h1>
-                    <hr class="hr-left rounded-pill">
-                    <p class="color-primary-custom"><i class="fas fa-map-marked-alt icon-contact"></i> Jalan Udayana,
-                        No.1, Denpasar</p>
-                    <p class="color-primary-custom"><i class="fas fa-phone-alt icon-contact"></i>+6287888999777</p>
-                    <p class="color-primary-custom"><i class="fas fa-envelope icon-contact"></i>info@mgraph.id</p>
-                    <h4 class="color-secondary-custom pt-4">Media Sosial</h4>
-                    <p class="text-light mt-1 icon-medsos">
-                        <a href="https://instagram.com/" target="_blank" class="text-light"><i
-                                class="fab fa-instagram p-2 bg-secondary-custom m-1 rounded-circle"></i></a>
-
-                        <a href="https://facebook.com/" target="_blank" class="text-light"><i
-                                class="fab fa-facebook p-2 bg-secondary-custom m-1 rounded-circle"></i></a>
-
-                        <a href="https://twitter.com/" target="_blank" class="text-light"><i
-                                class="fab fa-twitter p-2 bg-secondary-custom m-1 rounded-circle"></i></p></a>
-                </div>
-                <div class="col-sm-6">
-                    <form action="" class="form-contact">
-                        <div class="row pt-5"></div>
-                        <div class="row pb-4">
-                            <div class="col">
-                                <label for="fullname" class="form-label">Full Name</label>
-                                <input type="text" class="form-control" name="fullname" id="fullname"
-                                    placeholder="Full Name">
-                            </div>
-                            <div class="col">
-                                <label for="email_contact" class="form-label">Email</label>
-                                <input type="email" class="form-control" name="email_contact" id="email_contact"
-                                    placeholder="Email">
-                            </div>
-                        </div>
-                        <div class="row pb-4">
-                            <div class="col">
-                                <label for="telp" class="form-label">Phone Number</label>
-                                <input type="text" class="form-control" name="telp" id="telp"
-                                    placeholder="Phone Number">
-                            </div>
-                            <div class="col">
-                                <label for="subject" class="form-label">Subject</label>
-                                <input type="text" class="form-control" name="subject" id="subject"
-                                    placeholder="Subject">
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col">
-                                <label for="message" class="form-label">Message</label>
-                                <textarea name="message" id="message" class="form-control" cols="30"
-                                    rows="10">Message</textarea>
+                            <div class="col-md-6 rateby">
+                                <p><i class="fas fa-users"></i> {{ value.jumlah }}</p>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col button-contact">
-                                <button type="submit"
-                                    class="btn rounded-pill btn-outline-custom-primary mt-3 mb-5 ">Contact Us</button>
+                            <h6 class="card-title">{{ value.title|truncatechars:18 }}</h6>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <a href="https://www.imdb.com/title/tt{{ value.imdb }}/" target=”_blank” class="btn rounded-pill btn-outline-sm-custom-primary">IMDB</a>
+                                <a href="https://www.themoviedb.org/movie/{{ value.tmdb }}" target="_blank" class="btn rounded-pill btn-outline-sm-custom-primary">TMDB</a>
+                            </div>
+                            <div class="col-md-4 d-flex justify-content-end">
+                                <a type="button" class="color-primary-custom" data-bs-toggle="modal" data-bs-target="#modal-detail" onclick="detailMovie('{{ value.title }}','{{ value.genre }}','{{ value.avg|floatformat:1 }}','{{ value.imdb }}','{{ value.tmdb }}')"><i class="fas fa-info-circle"></i></a>
+                                <a type="button" class="color-primary-custom tag modal-tag" data-bs-toggle="modal" data-bs-target="#modal-tag" onclick="addTag('{{ key }}')"><i class="fas fa-tags"></i></a>
                             </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
+                {% endfor %}
             </div>
         </div>
-    </section>
+        {% endif %}
 
-    <!-- Footer -->
-    <footer class="bg-primary-custom">
-        <p class="text-center text-light pt-3">&copy COPYRIGHT 2021. M.Graph</p>
-    </footer>
-
-
-    <!-- Modal Rating -->
-    <div class="modal fade" id="modal-rating" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title text-center w-100" id="exampleModalLabel">Rate</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body text-center">
-                    <form action="">
-                        <div class="row pb-2">
-                            <div class="col d-flex justify-content-center">
-                                <p class="color-secondary-custom fs-1 p-2"><i class="far fa-star"></i></p>
-                                <p class="color-secondary-custom fs-1 p-2"><i class="far fa-star"></i></p>
-                                <p class="color-secondary-custom fs-1 p-2"><i class="far fa-star"></i></p>
-                                <p class="color-secondary-custom fs-1 p-2"><i class="far fa-star"></i></p>
-                                <p class="color-secondary-custom fs-1 p-2"><i class="far fa-star"></i></p>
+        <!-- Genre Favorite -->
+        {% if movie_genre %}
+        <div class="row mb-5">
+            <div class="row">
+                <h4 class="title-movie">Genre Favorite</h4>
+                <hr class="hr-left rounded-pill">
+            </div>
+            <div class="row">
+                {% for key, value in movie_genre.items %}
+                <div class="card mb-3" style="width: 13rem; padding-left: 0; padding-right: 0;">
+                    <img src="{%static 'recommender/img/img-movie2.jpg'%}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <div class="row rate">
+                            <div class="col-md-6">
+                                <p class="color-secondary-custom"><i class="fas fa-star"></i> {{ value.avg|floatformat:1 }}</p>
+                            </div>
+                            <div class="col-md-6 d-flex justify-content-end">
+                                <div class="float-right">
+                                    <a type="button" class="text-right color-primary-custom" data-bs-toggle="modal" data-bs-target="#modal-rating" onclick="addRate('{{ key }}')"><i class="far fa-star"></i></a>
+                                </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn rounded-pill btn-custom-primary mt-3 mb-2">Give Rate</button>
-                    </form>
+                        <div class="row">
+                            <div class="col-md-6 rateby">
+                                <p><i class="fas fa-users"></i> {{ value.jumlah }}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <h6 class="card-title">{{ value.title|truncatechars:18 }}</h6>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <a href="https://www.imdb.com/title/tt{{ value.imdb }}/" target=”_blank” class="btn rounded-pill btn-outline-sm-custom-primary">IMDB</a>
+                                <a href="https://www.themoviedb.org/movie/{{ value.tmdb }}" target="_blank" class="btn rounded-pill btn-outline-sm-custom-primary">TMDB</a>
+                            </div>
+                            <div class="col-md-4 d-flex justify-content-end">
+                                <a type="button" class="color-primary-custom" data-bs-toggle="modal" data-bs-target="#modal-detail" onclick="detailMovie('{{ value.title }}','{{ value.genre }}','{{ value.avg|floatformat:1 }}','{{ value.imdb }}','{{ value.tmdb }}')"><i class="fas fa-info-circle"></i></a>
+                                <a type="button" class="color-primary-custom tag modal-tag" data-bs-toggle="modal" data-bs-target="#modal-tag" onclick="addTag('{{ key }}')"><i class="fas fa-tags"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Top Rate -->
+        <div class="row mb-5">
+            <div class="row">
+                <h4 class="title-movie">Top Rated Movie</h4>
+                <hr class="hr-left rounded-pill">
+            </div>
+            <div class="row">
+                {% for key, value in movie_top.items %}
+                <div class="card mb-3" style="width: 13rem; padding-left: 0; padding-right: 0;">
+                    <img src="{%static 'recommender/img/img-movie2.jpg'%}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <div class="row rate">
+                            <div class="col-md-6">
+                                <p class="color-secondary-custom"><i class="fas fa-star"></i> {{ value.avg|floatformat:1 }}</p>
+                            </div>
+                            <div class="col-md-6 d-flex justify-content-end">
+                                <div class="float-right">
+                                    <a type="button" class="text-right color-primary-custom" data-bs-toggle="modal" data-bs-target="#modal-rating" onclick="addRate('{{ key }}')"><i class="far fa-star"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 rateby">
+                                <p><i class="fas fa-users"></i> {{ value.jumlah }}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <h6 class="card-title">{{ value.title|truncatechars:18 }}</h6>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <a href="https://www.imdb.com/title/tt{{ value.imdb }}/" target=”_blank” class="btn rounded-pill btn-outline-sm-custom-primary">IMDB</a>
+                                <a href="https://www.themoviedb.org/movie/{{ value.tmdb }}" target="_blank" class="btn rounded-pill btn-outline-sm-custom-primary">TMDB</a>
+                            </div>
+                            <div class="col-md-4 d-flex justify-content-end">
+                                <a type="button" class="color-primary-custom" data-bs-toggle="modal" data-bs-target="#modal-detail" onclick="detailMovie('{{ value.title }}','{{ value.genre }}','{{ value.avg|floatformat:1 }}','{{ value.imdb }}','{{ value.tmdb }}')"><i class="fas fa-info-circle"></i></a>
+                                <a type="button" class="color-primary-custom tag modal-tag" data-bs-toggle="modal" data-bs-target="#modal-tag" onclick="addTag('{{ key }}')"><i class="fas fa-tags"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Modal Rating -->
+<div class="modal fade" id="modal-rating" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-center w-100" id="exampleModalLabel">Rate</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <form action="{% url 'user_add_rate' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" class="id_movie_rate" name="id_movie">
+                    <div class="row p-2">
+                        <select name="rating" class="form-control select2" required>
+                            <option value="">Berikan Rating</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn rounded-pill btn-custom-primary mt-3 mb-2">Give Rate</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Tag -->
+<div class="modal fade" id="modal-tag" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-center w-100" id="exampleModalLabel">Tag</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <form action="{% url 'user_add_tag' %}" method="post">
+                    {% csrf_token %}
+                    <div class="row pb-2 m-2 text-center">
+                        <input type="hidden" name="id_movie" class="id_movie_tag">
+                        <input type="text" class="form-control rounded-pill text-center" name="tag" placeholder="masukan text tag">
+                    </div>
+                    <button type="submit" class="btn rounded-pill btn-custom-primary mt-3 mb-2">Give Tag</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal detail -->
+<div class="modal fade" id="modal-detail" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-center w-100" id="exampleModalLabel">Detail Movie</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row pb-2 m-2">
+                    <table class="table table-borderless">
+                        <tbody>
+                            <tr>
+                                <th scope="row">Judul</th>
+                                <td>:</td>
+                                <td><span id="title_detail"></span></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Genre</th>
+                                <td>:</td>
+                                <td><span id="genre_detail"></span></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Rating</th>
+                                <td>:</td>
+                                <td><span id="rate_detail"></span> / 5.0</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">IMDB ID</th>
+                                <td>:</td>
+                                <td><span id="imdb_detail"></span></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">TMDB ID</th>
+                                <td>:</td>
+                                <td><span id="tmdb_detail"></span></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
+</div>
+{% endblock movie %}
 
-    <!-- Modal Tag -->
-    <div class="modal fade" id="modal-tag" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title text-center w-100" id="exampleModalLabel">Tag</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body text-center">
-                    <form action="" method="post">
-                        <div class="row pb-2 m-2 text-center">
-                            <input type="text" class="form-control rounded-pill text-center" name="tag" id="tag"
-                                placeholder="masukan text tag">
-                        </div>
-                        <button type="submit" class="btn rounded-pill btn-custom-primary mt-3 mb-2">Give Tag</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <!-- Separate Popper and Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
-        integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
-        integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous">
-    </script>
+{% block scripts %}
+<script>
+function addTag(id) {
+    $('.id_movie_tag').val(id)
+}
 
-    <!-- My Script -->
-    <script src="{%static 'recommender/js/myscript.js'%}"></script>
+function addRate(id) {
+    $('.id_movie_rate').val(id)
+}
 
-    <!-- Aos Animation -->
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-    <script>
-        AOS.init({
-            offset: 200,
-            duration: 1200
-        });
-    </script>
-
-</body>
-
-</html>
+function detailMovie(title, genre, rate, imdb, tmdb) {
+    // console.log(title)
+    $('#title_detail').text(title)
+    $('#genre_detail').text(genre)
+    $('#rate_detail').text(rate)
+    $('#imdb_detail').text(imdb)
+    $('#tmdb_detail').text(tmdb)
+}
+</script>
+{% endblock scripts %}
+    

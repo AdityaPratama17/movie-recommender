@@ -52,7 +52,7 @@
                           {% elif value.jumRating == 0 and value.jumTag != 0 %}
                           <a href="{% url 'recommender:genre-favorit' id=key %}" class="btn btn-primary btn-sm">Genre favorit</a>
                           <a href="{% url 'recommender:rekomendasi-0' id=key %}" class="btn btn-primary btn-sm">Rekomendasi</a>
-                          {% elif value.jumRating == 1 and value.jumTag != 0 %}
+                          {% elif value.jumRating == 1 %}
                           <a href="{% url 'recommender:genre-favorit' id=key %}" class="btn btn-primary btn-sm">Genre favorit</a>
                           <a href="{% url 'recommender:rekomendasi-1' id=key %}" class="btn btn-primary btn-sm">Rekomendasi</a>
                           {% else %}
