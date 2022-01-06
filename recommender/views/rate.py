@@ -4,8 +4,8 @@ from django.http.response import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 from neo4j import GraphDatabase
 
-graphdb = GraphDatabase.driver(uri="bolt://localhost:11003", auth=("neo4j","1234"))
-# graphdb = GraphDatabase.driver(uri="bolt://localhost:7687", auth=("neo4j","1234"))
+# graphdb = GraphDatabase.driver(uri="bolt://localhost:11003", auth=("neo4j","1234"))
+graphdb = GraphDatabase.driver(uri="bolt://localhost:7687", auth=("neo4j","1234"))
 
 def rate(request):
     session = graphdb.session()
