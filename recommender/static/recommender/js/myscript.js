@@ -18,12 +18,6 @@ window.addEventListener('scroll', ()=>{
         if(li.classList.contains(current)){
             li.classList.add('nav-active');
         }
-
-        if(current=='whatinfo' || current=='whyinfo'){
-            if(li.classList.contains('home')){
-                 li.classList.add('nav-active');
-            }
-        }
     })
 })
 

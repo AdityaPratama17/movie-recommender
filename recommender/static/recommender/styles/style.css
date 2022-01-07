@@ -209,6 +209,10 @@ section.movie .title-movie{
     margin-left: -15px;
 }
 
+section.movie .card img{
+    height: 200px;
+}
+
 section.about img.vector_about {
     width: 80%;
 }

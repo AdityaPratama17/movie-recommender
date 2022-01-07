@@ -7,7 +7,7 @@
     <div class="container">
         
         {% if movie_rekomendasi %}
-        <div class="row mb-5">
+        <div class="row mb-5" data-aos="fade-up">
             <div class="row">
                 <h4 class="title-movie">Recommendation</h4>
                 <hr class="hr-left rounded-pill">
@@ -15,7 +15,9 @@
             <div class="row">
                 {% for key, value in movie_rekomendasi.items %}
                 <div class="card mb-3" style="width: 13rem; padding-left: 0; padding-right: 0;">
-                    <img src="{%static 'recommender/img/img-movie2.jpg'%}" class="card-img-top" alt="...">
+                    {% with 'recommender/img/poster-movie/'|add:key|add:'.jpg' as image_path %}
+                    <img class="card-img-top" src="{% static image_path %}" alt="{% static image_path %}"/>
+                    {% endwith %}
                     <div class="card-body">
                         <div class="row rate">
                             <div class="col-md-6">
@@ -54,7 +56,7 @@
 
         <!-- Genre Favorite -->
         {% if movie_genre %}
-        <div class="row mb-5">
+        <div class="row mb-5" data-aos="fade-up">
             <div class="row">
                 <h4 class="title-movie">Genre Favorite</h4>
                 <hr class="hr-left rounded-pill">
@@ -62,7 +64,9 @@
             <div class="row">
                 {% for key, value in movie_genre.items %}
                 <div class="card mb-3" style="width: 13rem; padding-left: 0; padding-right: 0;">
-                    <img src="{%static 'recommender/img/img-movie2.jpg'%}" class="card-img-top" alt="...">
+                    {% with 'recommender/img/poster-movie/'|add:key|add:'.jpg' as image_path %}
+                    <img class="card-img-top" src="{% static image_path %}" alt="{% static image_path %}"/>
+                    {% endwith %}
                     <div class="card-body">
                         <div class="row rate">
                             <div class="col-md-6">
@@ -100,15 +104,17 @@
         {% endif %}
 
         <!-- Top Rate -->
-        <div class="row mb-5">
+        <div class="row mb-5" data-aos="fade-up">
             <div class="row">
                 <h4 class="title-movie">Top Rated Movie</h4>
                 <hr class="hr-left rounded-pill">
             </div>
             <div class="row">
                 {% for key, value in movie_top.items %}
-                <div class="card mb-3" style="width: 13rem; padding-left: 0; padding-right: 0;">
-                    <img src="{%static 'recommender/img/img-movie2.jpg'%}" class="card-img-top" alt="...">
+                <div class="card mb-3" style="width: 13rem; padding-left: 0; padding-right: 0;">                   
+                    {% with 'recommender/img/poster-movie/'|add:key|add:'.jpg' as image_path %}
+                    <img class="card-img-top" src="{% static image_path %}" alt="{% static image_path %}"/>       
+                    {% endwith %}
                     <div class="card-body">
                         <div class="row rate">
                             <div class="col-md-6">
@@ -158,6 +164,7 @@
                 <form action="{% url 'user_add_rate' %}" method="post">
                     {% csrf_token %}
                     <input type="hidden" class="id_movie_rate" name="id_movie">
+                    <p><i class="far fa-star"></i></p>
                     <div class="row p-2">
                         <select name="rating" class="form-control select2" required>
                             <option value="">Berikan Rating</option>
