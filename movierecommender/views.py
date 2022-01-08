@@ -351,7 +351,6 @@ def search(request):
         where m.Title=~ '(?i).*"""+str(request.POST['query'])+""".*' or g.name =~ '(?i).*"""+str(request.POST['query'])+""".*'
         RETURN m.ID, m.Title, m.Genre, AVG(r.Rating) AS Avg, COUNT(m) as jum, l.IMDB_ID, l.TMDB_ID
         ORDER BY Avg DESC
-        LIMIT 10
         """
         hasil = session.run(query)
         for i in hasil:
