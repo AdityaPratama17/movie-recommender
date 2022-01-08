@@ -21,6 +21,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('recommender/', include(('recommender.urls','recommender'), namespace='recommender')),
     path('', views.index, name='home'),
+    path('search/', views.search, name='search'),
     path('register/', views.register, name='register'),
     path('login/', views.login, name='login'),
     path('logout/', views.logout, name='logout'),

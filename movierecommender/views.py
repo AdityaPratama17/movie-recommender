@@ -3,8 +3,8 @@ from django.http import HttpResponseRedirect
 import time, re
 from neo4j import GraphDatabase
 
-# graphdb = GraphDatabase.driver(uri="bolt://localhost:11003", auth=("neo4j","1234"))
-graphdb = GraphDatabase.driver(uri="bolt://localhost:7687", auth=("neo4j","1234"))
+graphdb = GraphDatabase.driver(uri="bolt://localhost:11003", auth=("neo4j","1234"))
+# graphdb = GraphDatabase.driver(uri="bolt://localhost:7687", auth=("neo4j","1234"))
 session = graphdb.session()
 
 def index(request):
@@ -342,11 +342,37 @@ def user_add_rate(request):
             session.run(query)
         return redirect('home')
 
+def search(request):
+    if request.method == "POST":
+        data = {}
+        query = """
+        match (m:Movie)-[:hasGenre]->(g:Genre),
+        (u:User)-[r:givesRating]->(m:Movie)-[:hasLink]->(l:Link)
+        where m.Title=~ '(?i).*"""+str(request.POST['query'])+""".*' or g.name =~ '(?i).*"""+str(request.POST['query'])+""".*'
+        RETURN m.ID, m.Title, m.Genre, AVG(r.Rating) AS Avg, COUNT(m) as jum, l.IMDB_ID, l.TMDB_ID
+        ORDER BY Avg DESC
+        LIMIT 10
+        """
+        hasil = session.run(query)
+        for i in hasil:
+            data[i.data()["m.ID"]] = {'title':i.data()["m.Title"], 'genre':i.data()["m.Genre"], 'avg':round(i.data()["Avg"], 3), 'jumlah':i.data()["jum"], 'tmdb':i.data()["l.TMDB_ID"],}
+            if len(i.data()["l.IMDB_ID"]) != 7:
+                data[i.data()["m.ID"]]['imdb'] = '0'*(7-len(i.data()["l.IMDB_ID"])) + i.data()["l.IMDB_ID"]
+            else:
+                data[i.data()["m.ID"]]['imdb'] = i.data()["l.IMDB_ID"]
+
+        print(data)
+        context ={
+            'data' : data,
+            'query' : request.POST['query'],
+        }
+        return render(request, 'search.html', context)
+
 def register(request):
     if request.method == "POST":
-        print(request.POST['id_user'])
-        print(request.POST['password'])
-        print(request.POST['confirm_password'])
+        # print(request.POST['id_user'])
+        # print(request.POST['password'])
+        # print(request.POST['confirm_password'])
         if re.search('[a-zA-Z]', request.POST['id_user']) or request.POST['password'] != request.POST['confirm_password']:
             return redirect('register')
         else:

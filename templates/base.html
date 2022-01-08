@@ -70,17 +70,16 @@
                         <h1 class="color-primary-custom-tint">Selamat Datang.</h1>
                         <p class="mt-3 text-light">Berbagai jenis movie dengan pencarian yang cepat, Explore sekarang.
                         </p>
-                        <form action="" method="get">
+                        <form action="{% url 'search' %}" method="post">
+                            {% csrf_token %}
                             <div class="row">
                                 <div class="col-md-10">
-                                    <input type="text" name="" id="" class="form-control rounded-pill"
-                                        placeholder="cari judul atau genre movie">
+                                    <input type="text" name="query" id="query" class="form-control rounded-pill" placeholder="cari judul atau genre movie">
                                 </div>
                                 <div class="col-md-1">
                                     <button type="submit" class="btn btn-custom-primary rounded-pill">Search</button>
                                 </div>
                             </div>
-
                         </form>
                         <a href="#movie" class="btn rounded-pill btn-outline-custom-primary mt-5">Lihat Movie</a>
                     </div>
