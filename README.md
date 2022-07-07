@@ -1,4 +1,4 @@
-Sistem rekomendasi ini merupakan suatu aplikasi berbasis web yang untuk menyediakan dan 
+Sistem rekomendasi ini merupakan suatu aplikasi berbasis web yang digunakan untuk menyediakan dan 
 merekomendasikan suatu item dalam membuat suatu keputusan yang diinginkan oleh 
 pengguna dan dalam hal ini yang ditampilkan adalah rekomendasi film. Dalam project 
 ini sistem rekomendasi film menggunakan algoritma content-based filtering dan 
